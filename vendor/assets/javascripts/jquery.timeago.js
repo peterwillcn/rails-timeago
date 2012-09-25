@@ -119,9 +119,13 @@
   };
 
   function refresh() {
-    var data = prepareData(this);
-    if (!isNaN(data.datetime)) {
-      $(this).text(inWords(data.datetime));
+    var d = prepareData(this).datetime;
+    if (!isNaN(d)) {
+      if ($(this).data('time-ago'))
+        $(this).text(inWords(d));
+      else
+        $(this).text(d.getFullYear() + "-" + (d.getMonth() +  1) + "-"  + d.getDate());
+      $(this).attr("title", d.toString());
     }
     return this;
   }
